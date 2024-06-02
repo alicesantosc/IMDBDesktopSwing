@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
@@ -15,6 +16,7 @@ import javax.swing.SwingUtilities;
 import com.formdev.flatlaf.FlatDarkLaf;
 
 import dao.UsuarioDAO;
+import model.Avaliacao;
 
 public class AvaliacaoForm extends JFrame{
 	
@@ -36,7 +38,7 @@ public class AvaliacaoForm extends JFrame{
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Avalie um filme");
-		lblNewLabel.setBounds(167, 11, 181, 14);
+		lblNewLabel.setBounds(182, 24, 181, 14);
 		panel.add(lblNewLabel);
 		
 		txtDigiteOFilme = new JTextField();
@@ -66,12 +68,7 @@ public class AvaliacaoForm extends JFrame{
 		JButton btnNewButton_1 = new JButton("Avaliar");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//crio string para o getText
-				String nomeAvaliador = txtUsuario.getText();
-				String emailAvaliador = txtEmail_1.getText();
-				
-				UsuarioDAO usuarioDAO = new UsuarioDAO();
-				int idUsuario = usuarioDAO.buscarIdUsuario(nomeAvaliador, emailAvaliador);
+				;
 				
 			}
 		});
@@ -89,12 +86,30 @@ public class AvaliacaoForm extends JFrame{
 		txtEmail_1.setBounds(167, 61, 86, 20);
 		panel.add(txtEmail_1);
 		txtEmail_1.setColumns(10);
+		
+		JButton btnNewButton_2 = new JButton("Entrar");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String nomeUsuario = txtUsuario.getText();
+				String emailUsuario = txtEmail_1.getText();
+				UsuarioDAO usuarioDAO = new UsuarioDAO();
+                int idUsuario = usuarioDAO.buscarIdUsuario(nomeUsuario, emailUsuario);
+                if(idUsuario != -1) {
+                	Avaliacao avaliacao = new Avaliacao();
+                	avaliacao.setusuarioId(idUsuario);
+                	JOptionPane.showMessageDialog(btnNewButton_2, "Você entrou na sua conta com sucesso!");
+                }else {
+                	UsuarioForm usuarioForm = new UsuarioForm();
+                	usuarioForm.setVisible(true);
+                }
+			}
+		});
+		btnNewButton_2.setBounds(325, 60, 89, 23);
+		panel.add(btnNewButton_2);
 	}
 
 	public static void main(String[] args) {
 		FlatDarkLaf.setup();
         SwingUtilities.invokeLater(() -> new AvaliacaoForm().setVisible(true));
 	}
-	
-
 }

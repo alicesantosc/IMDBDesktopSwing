@@ -32,7 +32,7 @@ public class UsuarioForm extends JFrame {
 	public UsuarioForm() {
 
 		setTitle("Adicionar Usuario");
-		setSize(500, 700);
+		setSize(700, 700);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JPanel panel = new JPanel();
@@ -100,7 +100,8 @@ public class UsuarioForm extends JFrame {
 		JButton btnNewButton_1 = new JButton("Listar Usuarios");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				UsuarioListagem usuarioListagem = new UsuarioListagem();
+				usuarioListagem.setVisible(true);
 				
 			}
 		});

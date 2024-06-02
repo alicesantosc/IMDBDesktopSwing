@@ -49,12 +49,10 @@ public class UsuarioDAO {
 				usuario.setId(id);
 				usuario.setNome(nome);
 				usuario.setEmail(email);
-				
+
 				usuarios.add(usuario);
 
 			}
-			
-			
 
 		} catch (SQLException e) {
 
@@ -63,32 +61,42 @@ public class UsuarioDAO {
 		return usuarios;
 
 	}
-	
-	
+
 	public int buscarIdUsuario(String nome, String email) {
 		int idUsuario = -1;
 		String sql = "SELECT id from Usuario WHERE nome = ? AND email = ?";
-		try(Connection conn = ConectarDB.getConnection();
-				PreparedStatement stmt = conn.prepareStatement(sql);) {
-			
+		try (Connection conn = ConectarDB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
+
 			stmt.setString(1, nome);
-			stmt.setString(2,email);
-			//no rs eu executo a Query
+			stmt.setString(2, email);
+			// no rs eu executo a Query
 			ResultSet rs = stmt.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				idUsuario = rs.getInt("id");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return idUsuario;
-		
-		
-		
+
 	}
 
-	
+	public int deletarPorIdUsuario(int id) {
+		String sql = "DELETE FROM Usuario WHERE ID = ?";
+		try (Connection conn = ConectarDB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+			stmt.setInt(1, id);
+			stmt.executeUpdate();
+			System.out.println("Usuário com ID " + id + " removido com sucesso.");
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return id;
+
+	}
 
 }

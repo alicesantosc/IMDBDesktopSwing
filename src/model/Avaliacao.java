@@ -2,6 +2,8 @@ package model;
 
 public class Avaliacao {
 	private int id;
+	private int filmeId;
+	private int usuarioId;
 	private int nota;
 	private String comentario;
 
@@ -11,6 +13,22 @@ public class Avaliacao {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getusuarioId() {
+		return usuarioId;
+	}
+
+	public void setusuarioId(int usuarioId) {
+		this.usuarioId = usuarioId;
+	}
+
+	public int getfilmeId() {
+		return filmeId;
+	}
+
+	public void setfilmeId(int filmeId) {
+		this.filmeId = filmeId;
 	}
 
 	public int getNota() {

@@ -8,6 +8,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class HomeIMDB extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7345513646755110636L;
 	private JTextField textField;
 
     public HomeIMDB() {
@@ -34,8 +38,11 @@ public class HomeIMDB extends JFrame {
         btnFilmes.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Código para navegar para a página de filmes
-                JOptionPane.showMessageDialog(HomeIMDB.this, "Filmes clicado");
+            	
+            	FilmeListagem filmeListagem = new FilmeListagem();
+            	filmeListagem.setVisible(true);
+           
+               ///mais tarde filtrar por genero
             }
         });
 
@@ -43,8 +50,11 @@ public class HomeIMDB extends JFrame {
         btnDiretores.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+            	
+            	DiretorListagem diretorListagem = new DiretorListagem();
+            	diretorListagem.setVisible(true);
                 // Código para navegar para a página de diretores
-                JOptionPane.showMessageDialog(HomeIMDB.this, "Diretores clicado");
+                
             }
         });
 
@@ -139,27 +149,23 @@ public class HomeIMDB extends JFrame {
         btnNewButton_2.setBounds(75, 202, 89, 23);
         desktopPane.add(btnNewButton_2);
         
-        JLabel lblNewLabel_4 = new JLabel("MELHORES AVALIADOS");
-        lblNewLabel_4.setBounds(68, 52, 221, 14);
-        desktopPane.add(lblNewLabel_4);
-        
         JSeparator separator_1 = new JSeparator();
         separator_1.setBounds(-18, 65, 252, 10);
         desktopPane.add(separator_1);
         
-        JLabel lblNewLabel_3 = new JLabel("");
-        lblNewLabel_3.setBounds(75, 11, 140, 43);
-        desktopPane.add(lblNewLabel_3);
-        lblNewLabel_3.setIcon(new ImageIcon(HomeIMDB.class.getResource("/Imagem/Captura de tela 2024-06-01 180253.png")));
+        JLabel lblNewLabel_4 = new JLabel("");
+        lblNewLabel_4.setBounds(42, 11, 221, 41);
+        desktopPane.add(lblNewLabel_4);
+        lblNewLabel_4.setIcon(new ImageIcon(HomeIMDB.class.getResource("/Imagem/Captura de tela 2024-06-01 215408.png")));
         
         JLabel lblNewLabel_5 = new JLabel("");
         lblNewLabel_5.setIcon(new ImageIcon(HomeIMDB.class.getResource("/Imagem/Captura de tela 2024-06-01 211052.png")));
-        lblNewLabel_5.setBounds(10, 39, 204, 315);
+        lblNewLabel_5.setBounds(10, 63, 204, 315);
         contentPane.add(lblNewLabel_5);
         
         JTextPane txtpnFromFilmmakerYorgos = new JTextPane();
         txtpnFromFilmmakerYorgos.setText("From filmmaker Yorgos Lanthimos and producer Emma Stone comes the incredible tale and fantastical evolution of Bella Baxter (Stone), a young woman brought back to life by the brilliant and unorthodox scientist Dr. Godwin Baxter (Willem Dafoe). Under Baxter's protection, Bella is eager to learn. Hungry for the worldliness she is lacking, Bella runs off with Duncan Wedderburn (Mark Ruffalo), a slick and debauched lawyer, on a whirlwind adventure across the continents. Free from the prejudices of her times, Bella grows steadfast in her purpose to stand for equality and liberation.");
-        txtpnFromFilmmakerYorgos.setBounds(224, 133, 261, 221);
+        txtpnFromFilmmakerYorgos.setBounds(224, 133, 261, 245);
         contentPane.add(txtpnFromFilmmakerYorgos);
         
         JTextPane txtpnNotaMdia = new JTextPane();
