@@ -38,7 +38,7 @@ public class FilmeForm extends JFrame {
     public FilmeForm() {
         setTitle("Adicionar Filme");
         setSize(882, 570);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ///setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         initComponents();
     }
 
@@ -55,22 +55,42 @@ public class FilmeForm extends JFrame {
         generoField.setBounds(131, 209, 166, 20);
         salvarButton = new JButton("Salvar");
         salvarButton.setBounds(82, 351, 63, 23);
+        
+        JPanel panel = new JPanel();
+        panel.setLayout(null);
+        
+        
+        @SuppressWarnings("JComboBox")
+		JComboBox diretorcomboBox = new JComboBox();
+        diretorcomboBox.setBackground(Color.BLACK);
+        diretorcomboBox.setBounds(134, 275, 163, 22);
+        diretorcomboBox.addItem("Selecione um diretor");
+        ///metodo para carregar diretores
+        carregarDiretores(diretorcomboBox);
+        panel.add(diretorcomboBox);
 
         salvarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+            	Diretor diretorSelecionado = (Diretor) diretorcomboBox.getSelectedItem();
+            	 if (diretorSelecionado == null) {
+                     JOptionPane.showMessageDialog(FilmeForm.this, "Por favor, selecione um diretor.");
+                     return;
+                 }
+            	
+            	
                 Filme filme = new Filme();
                 filme.setTitulo(tituloField.getText());
                 filme.setAno(Integer.parseInt(anoField.getText()));
                 filme.setGenero(generoField.getText());
+                filme.setDiretorId(diretorSelecionado.getId());
               
                 new FilmeDAO().adicionarFilme(filme);
                 JOptionPane.showMessageDialog(FilmeForm.this, "Filme adicionado com sucesso!");
             }
         });
 
-        JPanel panel = new JPanel();
-        panel.setLayout(null);
+       
         
         JButton btnNewButton = new JButton("Cadastrar Diretor");
         btnNewButton.addActionListener(new ActionListener() {
@@ -93,14 +113,7 @@ public class FilmeForm extends JFrame {
         btnNewButton.setBounds(327, 275, 179, 23);
         panel.add(btnNewButton);
         
-        @SuppressWarnings("JComboBox")
-		JComboBox diretorcomboBox = new JComboBox();
-        diretorcomboBox.setBackground(Color.BLACK);
-        diretorcomboBox.setBounds(134, 275, 163, 22);
-        diretorcomboBox.addItem("Selecione um diretor");
-        ///metodo para carregar diretores
-        carregarDiretores(diretorcomboBox);
-        panel.add(diretorcomboBox);
+        
         
         JLabel lblNewLabel_3 = new JLabel("Cadastre um novo filme");
         lblNewLabel_3.setFont(new Font("Yu Gothic Light", Font.PLAIN, 25));

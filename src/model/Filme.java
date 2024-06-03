@@ -49,4 +49,9 @@ public class Filme {
 	public void setDiretorId(int diretorId) {
 		this.diretorId = diretorId;
 	}
+	
+	 @Override
+	    public String toString() {
+	        return this.titulo;
+	    }
 }

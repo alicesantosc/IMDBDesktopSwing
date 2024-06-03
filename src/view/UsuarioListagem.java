@@ -30,7 +30,7 @@ public class UsuarioListagem extends JFrame {
 	    public UsuarioListagem() {
 	        setTitle("Lista de Usuários");
 	        setSize(1000, 1000);
-	        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	        initComponents();
 	        listarUsuarios();
 	    }

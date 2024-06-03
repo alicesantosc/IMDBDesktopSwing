@@ -80,8 +80,9 @@ public class HomeIMDB extends JFrame {
         btnAvaliacoes.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Código para navegar para a página de avaliações
-                JOptionPane.showMessageDialog(HomeIMDB.this, "Avaliações clicado");
+              AvaliacaoForm avaliacaoForm = new AvaliacaoForm();
+              avaliacaoForm.setVisible(true);
+               
             }
         });
 
@@ -137,6 +138,12 @@ public class HomeIMDB extends JFrame {
         contentPane.add(lblNewLabel_2);
         
         JButton btnNewButton = new JButton("buscar");
+        btnNewButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		BuscarFilmeView buscarFilme = new BuscarFilmeView();
+        		buscarFilme.setVisible(true);
+        	}
+        });
         btnNewButton.setBounds(494, 5, 89, 23);
         contentPane.add(btnNewButton);
         

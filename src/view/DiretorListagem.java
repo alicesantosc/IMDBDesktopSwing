@@ -27,7 +27,7 @@ public class DiretorListagem extends JFrame {
 	public DiretorListagem() {
 		setTitle("Listagem de Diretores");
 		setSize(791,550);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		///setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		modeloTabela = new DefaultTableModel();
 		modeloTabela.addColumn("ID");
