@@ -8,20 +8,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Avaliacao;
-import model.Filme;
-import model.Usuario;
+import model.MediaFilme;
 
 public class AvaliacaoDAO {
 
 	/// metodos para acesso ao db
 
 	public void adicionarAvaliacao(Avaliacao avaliacao) {
-		String sql = "INSERT INTO AVALIACAO(FILME_ID,USUARIO_ID,NOTA,COMENTARIO) values (?,?,?,?)";
-		Usuario usuario = new Usuario();
-		Filme filme = new Filme();
+		String sql = "INSERT INTO AVALIACAO(filme_id ,usuario_id,NOTA,COMENTARIO) values (?,?,?,?)";
+		
+		
 		try (Connection conn = ConectarDB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
-			stmt.setInt(1, filme.getId());
-			stmt.setInt(2, usuario.getId());
+			stmt.setInt(1, avaliacao.getfilmeId());
+			stmt.setInt(2, avaliacao.getusuarioId());
 			stmt.setInt(3, avaliacao.getNota());
 			stmt.setString(4, avaliacao.getComentario());
 			stmt.executeUpdate();
@@ -36,9 +35,10 @@ public class AvaliacaoDAO {
 	/// fazendo a lista das avaliações
 
 	public List<Avaliacao> listarAvaliacoes() {
-		String sql = "SELECT * FROM Avaliacao";
 		List<Avaliacao> avaliacoes = new ArrayList<>();
 
+		String sql = "SELECT * FROM Avaliacao";
+		
 		try (Connection conn = ConectarDB.getConnection();
 				PreparedStatement stmt = conn.prepareStatement(sql);
 				ResultSet rs = stmt.executeQuery();) {
@@ -51,7 +51,7 @@ public class AvaliacaoDAO {
 				avaliacao.setNota(rs.getInt("nota"));
 				avaliacao.setComentario(rs.getString("comentario"));
 				avaliacoes.add(avaliacao);
-				/// stmt.executeUpdate(sql);
+				
 
 			}
 
@@ -73,5 +73,31 @@ public class AvaliacaoDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	
+	
+	
+	public List<MediaFilme> calcularMediaAvaliacoesFilme() {
+	    List<MediaFilme> mediaAvaliacoesPorFilme = new ArrayList<>();
+	    String sql = "SELECT f.titulo, AVG(a.nota) AS media " +
+	                 "FROM Avaliacao a " +
+	                 "JOIN Filme f ON a.filme_id = f.id " +
+	                 "GROUP BY f.titulo";
 
+	    try (Connection conn = ConectarDB.getConnection();
+	         PreparedStatement stmt = conn.prepareStatement(sql);
+	         ResultSet rs = stmt.executeQuery();) {
+	        while (rs.next()) {
+	            String tituloFilme = rs.getString("titulo");
+	            double media = rs.getDouble("media");
+	            mediaAvaliacoesPorFilme.add(new MediaFilme(tituloFilme, media));
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return mediaAvaliacoesPorFilme;
+	}
 }

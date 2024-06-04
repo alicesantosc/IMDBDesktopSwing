@@ -112,5 +112,26 @@ public class FilmeDAO {
 		return filmes;
 		
 	}
+	
+	public int buscarIdporTituloFilme(String tituloFilme){
+		int idFilme = -1;
+		String sql = "SELECT id FROM filme WHERE titulo = ?";
+		try(Connection conn = ConectarDB.getConnection();
+				PreparedStatement stmt = conn.prepareStatement(sql);
+				ResultSet rs = stmt.executeQuery();) {
+			
+			while(rs.next()) {
+				
+				idFilme = rs.getInt("id");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return idFilme;
+	}
 
 }

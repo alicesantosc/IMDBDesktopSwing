@@ -30,5 +30,9 @@ public class Ator {
 	public void setData_nascimento(LocalDate data_nascimento) {
 		this.data_nascimento = data_nascimento;
 	}
+	
+	public String toString() {
+		return nome;
+	}
 
 }

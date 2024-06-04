@@ -166,6 +166,8 @@ public class FilmeForm extends JFrame {
     		 diretorcomboBox.addItem(diretor);
          }
 	}
+    
+    
 
 	public static void main(String[] args) {
     	FlatDarkLaf.setup();

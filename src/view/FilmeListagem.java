@@ -45,14 +45,14 @@ public class FilmeListagem extends JFrame {
 		// Adicione mais colunas conforme necessário
 
 		// Recupera os filmes do banco de dados
-		FilmeDAO filmeDAO = new FilmeDAO();
-		for (Filme filme : filmeDAO.listarFilmes()) {
-			modeloTabela.addRow(new Object[] { filme.getId(), filme.getTitulo(), filme.getAno(), filme.getGenero(),
-					filme.getDiretorId() });
+		
 			// Adicione mais colunas conforme necessário
-		}
+		
+	
 		getContentPane().setLayout(null);
-
+		
+		carregarFilmes();
+		
 		// Cria a tabela e define o modelo de tabela
 		tabela = new JTable(modeloTabela);
 
@@ -100,6 +100,7 @@ public class FilmeListagem extends JFrame {
 
 				FilmeForm filmeForm = new FilmeForm();
 				filmeForm.setVisible(true);
+				
 			}
 		});
 		btnNewButton_2.setBounds(22, 455, 160, 23);
@@ -120,6 +121,7 @@ public class FilmeListagem extends JFrame {
 				JOptionPane.showMessageDialog(btnNewButton_3, "Filme deletado");
 
 				filmeDAO.listarFilmes();
+				carregarFilmes();
 
 			}
 		});
@@ -133,6 +135,19 @@ public class FilmeListagem extends JFrame {
 		txtDigiteOId.setColumns(10);
 	}
 
+	public void carregarFilmes() {
+		modeloTabela.setRowCount(0);
+	
+		FilmeDAO filmeDAO = new FilmeDAO();
+		for (Filme filme : filmeDAO.listarFilmes()) {
+			modeloTabela.addRow(new Object[] { filme.getId(), filme.getTitulo(), filme.getAno(), filme.getGenero(),
+					filme.getDiretorId() });
+		}
+	}
+	
+	
+	
+	
 	public static void main(String[] args) {
 		FlatDarkLaf.setup();
 		SwingUtilities.invokeLater(() -> new FilmeListagem().setVisible(true));

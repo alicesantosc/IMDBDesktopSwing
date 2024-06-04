@@ -37,7 +37,7 @@ public class AtorDAO {
 		//crio o array
 		List<Ator> atores = new ArrayList<>();
 		///string sql
-		String sql = "SELECT * FROM ATORES";
+		String sql = "SELECT * FROM ATOR";
 		try(Connection conn = ConectarDB.getConnection();
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();){
@@ -60,5 +60,21 @@ public class AtorDAO {
 		
 		
 	}
-
+	
+	public int buscarIdPorNome(String nome) {
+        int idAtor = -1;
+        String sql = "SELECT id FROM Ator WHERE nome = ?";
+        try (Connection conn = ConectarDB.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);) {
+            stmt.setString(1, nome);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    idAtor = rs.getInt("id");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return idAtor;
+    }
 }

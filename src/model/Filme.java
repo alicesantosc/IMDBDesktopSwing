@@ -1,7 +1,5 @@
 package model;
 
-
-
 public class Filme {
 	private int id;
 	private String titulo;
@@ -49,9 +47,8 @@ public class Filme {
 	public void setDiretorId(int diretorId) {
 		this.diretorId = diretorId;
 	}
-	
-	 @Override
-	    public String toString() {
-	        return this.titulo;
-	    }
+
+	public String toString() {
+		return titulo;
+	}
 }
